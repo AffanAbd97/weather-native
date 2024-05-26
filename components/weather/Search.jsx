@@ -1,26 +1,28 @@
 import React from "react";
 import { View, Button, StyleSheet } from "react-native";
 import Input from "../Input";
-
+import IconButton from "../IconButton";
 
 const WeatherSearch = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Input
+        style={styles.input}
         placeholder="Search the weather of your city"
         numberOfLines={1}
       />
-      <View style={styles.buttonWrapper}>
-        <Button title="Search" onPress={() => {}} />
-      </View>
+      <IconButton />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  buttonWrapper: {
-    marginTop: 20,
+  container: {
+    flexDirection: "row",
+    padding: 0,
+    height: 50,
   },
+  buttonWrapper: {},
 });
 
 export default WeatherSearch;

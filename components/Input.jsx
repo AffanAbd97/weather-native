@@ -25,9 +25,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#DDDDDD",
     padding: 10,
+    borderTopLeftRadius: 30,
+    borderBottomLeftRadius: 30,
   },
   container: {
-    marginTop: 20,
+  
   },
 });
 

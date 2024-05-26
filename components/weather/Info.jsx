@@ -1,7 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { todayDate } from "../../utils/helper";
+import IconInfo from "../IconInfo";
 
+import WindIcon from "../.././assets/icons/wind.png";
+import EyeIcon from "../.././assets/icons/eye.png";
+import WaterIcon from "../.././assets/icons/water.png";
 const WeatherInfo = ({ data }) => {
   const imageUrl = `https://openweathermap.org/img/w/${data.weather.icon}.png`;
   return (
@@ -22,17 +26,15 @@ const WeatherInfo = ({ data }) => {
         <Text style={[styles.text, styles.city]}>{data.name}</Text>
       </View>
       <Text style={styles.text}>{data.weather.description}</Text>
-      <View style={[styles.rowContainer, styles.marginTop20]}>
-        <Text style={[styles.text, styles.bold]}>Visibility :</Text>
-        <Text style={[styles.text, styles.marginLeft15]}>
-          {data.visibility} km
-        </Text>
-      </View>
-      <View style={[styles.rowContainer, styles.marginTop20]}>
-        <Text style={[styles.text, styles.bold]}>Wind Speed :</Text>
-        <Text style={[styles.text, styles.marginLeft15]}>
-          {data.wind.speed} m/s
-        </Text>
+
+      <View style={styles.info}>
+        <IconInfo icon={EyeIcon} text={`${data.visibility} Km`} />
+        <IconInfo
+          center={true}
+          icon={WindIcon}
+          text={`${data.wind.speed} m/s`}
+        />
+        <IconInfo icon={WaterIcon} text={`${data.main.humidity} %`} />
       </View>
     </View>
   );
@@ -41,9 +43,16 @@ const WeatherInfo = ({ data }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
-    height: "100%",
+    flex: 1,
+  },
+  info: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+
+    gap: 2,
+    marginTop: 20,
   },
   cityInfo: {
     flexDirection: "column",

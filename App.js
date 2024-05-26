@@ -20,7 +20,7 @@ const App = () => {
       .then((response) => {
         const data = response.data;
         data.visibility /= 1000;
-        data.visibility = data.visibility.toFixed(2);
+        data.visibility = data.visibility.toFixed();
         data.main.temp -= 273.15;
         data.main.temp = data.main.temp.toFixed();
         data.weather = data.weather[0];
@@ -28,7 +28,7 @@ const App = () => {
         setStatus("success");
       })
       .catch((error) => {
-        // Mengatur status ke "error"
+        
         setStatus("error");
       });
   };
@@ -38,7 +38,17 @@ const App = () => {
   const renderComponent = () => {
     switch (status) {
       case "loading":
-        return <ActivityIndicator size="large" />;
+        return (
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ActivityIndicator size="large" />
+          </View>
+        );
       case "success":
         return <WeatherInfo data={weatherData} />;
       case "error":
@@ -57,8 +67,8 @@ const App = () => {
         colors={["#3d6cc1", "#00d4ff"]}
         style={styles.linearGradient}
       >
-        <View>{renderComponent()}</View>
-        {/* <WeatherSearch /> */}
+        <View style={styles.content}>{renderComponent()}</View>
+        <WeatherSearch />
       </LinearGradient>
     </View>
   );
@@ -68,10 +78,14 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
   },
+  content: {
+    flex: 1,
+  },
   linearGradient: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 32,
   },
 });
 

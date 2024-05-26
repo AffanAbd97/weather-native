@@ -4,6 +4,7 @@ import WeatherSearch from "./components/weather/Search";
 import WeatherInfo from "./components/weather/Info";
 import { BASE_WEATHER_URL, API_KEY } from "@env";
 import axios from "axios";
+import { LinearGradient } from "expo-linear-gradient";
 
 const App = () => {
   const [city, setCity] = useState("kudus");
@@ -13,16 +14,16 @@ const App = () => {
   console.log(API_KEY);
 
   const fetchWeather = async (city) => {
-    setStatus('loading')
+    setStatus("loading");
     axios
       .get(`${BASE_WEATHER_URL}?q=${city}&appid=${API_KEY}`)
       .then((response) => {
         const data = response.data;
-        data.visibility /= 1000
-        data.visibility = data.visibility.toFixed(2)
-        data.main.temp -= 273.15 
-        data.main.temp = data.main.temp.toFixed()
-        data.weather = data.weather[0]
+        data.visibility /= 1000;
+        data.visibility = data.visibility.toFixed(2);
+        data.main.temp -= 273.15;
+        data.main.temp = data.main.temp.toFixed();
+        data.weather = data.weather[0];
         setWeatherData(data);
         setStatus("success");
       })
@@ -52,15 +53,25 @@ const App = () => {
   };
   return (
     <View style={styles.container}>
-      <WeatherSearch />
-      <View>{renderComponent()}</View>
+      <LinearGradient
+        colors={["#3d6cc1", "#00d4ff"]}
+        style={styles.linearGradient}
+      >
+        <View>{renderComponent()}</View>
+        {/* <WeatherSearch /> */}
+      </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    height: "100%",
+  },
+  linearGradient: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

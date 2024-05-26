@@ -5,16 +5,22 @@ import { todayDate } from "../../utils/helper";
 const WeatherInfo = ({ data }) => {
   const imageUrl = `https://openweathermap.org/img/w/${data.weather.icon}.png`;
   return (
-    <View style={styles.marginTop20}>
+    <View style={[styles.marginTop20, styles.textWhite, styles.container]}>
       <View style={[styles.rowContainer, styles.marginTop20]}>
         <Image source={{ uri: imageUrl }} style={styles.weatherIcon} />
-        <Text style={[styles.text, styles.bold]}>{data.weather.main}</Text>
+        <Text style={[styles.text, styles.bold, styles.textWhite]}>
+          {data.weather.main}
+        </Text>
       </View>
       <Text style={styles.text}>{todayDate()}</Text>
-      <Text style={styles.text}>The weather of {data.name}</Text>
-      <Text style={[styles.temperature, styles.marginTop20]}>
-        {data.main.temp}C
-      </Text>
+      <View style={styles.cityInfo}>
+        <Text
+          style={[styles.temperature, styles.marginTop20, styles.textWhite]}
+        >
+          {data.main.temp}&#176;
+        </Text>
+        <Text style={[styles.text, styles.city]}>{data.name}</Text>
+      </View>
       <Text style={styles.text}>{data.weather.description}</Text>
       <View style={[styles.rowContainer, styles.marginTop20]}>
         <Text style={[styles.text, styles.bold]}>Visibility :</Text>
@@ -33,6 +39,20 @@ const WeatherInfo = ({ data }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: "100%",
+  },
+  cityInfo: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  city: {
+    fontSize: 32,
+  },
   marginTop20: {
     marginTop: 20,
   },
@@ -42,7 +62,9 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     fontSize: 16,
+    color: "white",
   },
+  textWhite: { color: "white" },
   bold: {
     fontWeight: "700",
   },

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { todayDate } from "../../utils/helper";
+import { capEachWord, todayDate } from "../../utils/helper";
 import IconInfo from "../IconInfo";
 
 import WindIcon from "../.././assets/icons/wind.png";
@@ -25,7 +25,7 @@ const WeatherInfo = ({ data }) => {
         </Text>
         <Text style={[styles.text, styles.city]}>{data.name}</Text>
       </View>
-      <Text style={styles.text}>{data.weather.description}</Text>
+      <Text style={styles.text}>{capEachWord(data.weather.description)}</Text>
 
       <View style={styles.info}>
         <IconInfo icon={EyeIcon} text={`${data.visibility} Km`} />
@@ -43,7 +43,6 @@ const WeatherInfo = ({ data }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    // justifyContent: "space-between",
     alignItems: "center",
     flex: 1,
   },

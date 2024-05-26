@@ -14,6 +14,7 @@ const Input = ({
       numberOfLines={numberOfLines}
       style={styles.input}
       placeholder={placeholder}
+      placeholderTextColor={'#f0f0f0'}
       onChangeText={onChange}
       defaultValue={text}
     />
@@ -23,14 +24,13 @@ const Input = ({
 const styles = StyleSheet.create({
   input: {
     borderWidth: 2,
-    borderColor: "#DDDDDD",
+    borderColor: "#fff",
     padding: 10,
     borderTopLeftRadius: 30,
     borderBottomLeftRadius: 30,
+    color: "#fff",
   },
-  container: {
-  
-  },
+  container: {},
 });
 
 export default Input;

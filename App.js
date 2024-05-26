@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator, Text } from "react-native";
 import WeatherSearch from "./components/weather/Search";
 import WeatherInfo from "./components/weather/Info";
 import { BASE_WEATHER_URL, API_KEY } from "@env";
@@ -10,8 +10,6 @@ const App = () => {
   const [city, setCity] = useState("kudus");
   const [status, setStatus] = useState("");
   const [weatherData, setWeatherData] = useState();
-  console.log(BASE_WEATHER_URL);
-  console.log(API_KEY);
 
   const fetchWeather = async (city) => {
     setStatus("loading");
@@ -28,7 +26,6 @@ const App = () => {
         setStatus("success");
       })
       .catch((error) => {
-        
         setStatus("error");
       });
   };
@@ -46,16 +43,18 @@ const App = () => {
               justifyContent: "center",
             }}
           >
-            <ActivityIndicator size="large" />
+            <ActivityIndicator color={"#fff"} size="large" />
           </View>
         );
       case "success":
         return <WeatherInfo data={weatherData} />;
       case "error":
         return (
-          <Text>
-            Something went wrong. Please try again with a correct city name.
-          </Text>
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>
+              Something went wrong. Please try again with a correct city name.
+            </Text>
+          </View>
         );
       default:
         return;
@@ -68,7 +67,7 @@ const App = () => {
         style={styles.linearGradient}
       >
         <View style={styles.content}>{renderComponent()}</View>
-        <WeatherSearch />
+        <WeatherSearch setSearch={setCity} />
       </LinearGradient>
     </View>
   );
@@ -86,6 +85,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 32,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorText: {
+    color: "#fff",
+    fontSize: 18,
+    textAlign: "center",
+    margin: 20,
   },
 });
 
